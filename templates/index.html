@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Grocery List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js')}}"></script>
 </head>
 <body>
+    <div>
+        <img src="https://raw.githubusercontent.com/MariyaSha/groceriesList/main/logo_black.png" alt="grocery app logo">
+    </div>
     <div id="remove_items">
         <form action="/remove_items" method="POST">
             {% for item in shopping_items %}
             <input type="checkbox" name="check" id="{{ item }}" value="{{ item }}">
             <label for="{{ item }}" name="{{ item }}">{{ item }}</label><br>
             {% endfor %}
-            <input type="submit" value="REMOVE ITEMS">
+            <input type="submit" value="CHECK ITEMS" id="remove_btn">
         </form>
     </div>
     <div id="add_item">
@@ -21,7 +26,7 @@
                       <option value="{{ item }}">{{ item }}</option>
                   {% endfor %}
             </select>
-            <input type="submit" value="ADD ITEM">
+            <input type="submit" value="ADD ITEM" id="add_btn">
         </form>
     </div>
 
