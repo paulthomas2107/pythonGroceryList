@@ -5,10 +5,19 @@
     <title>Grocery List</title>
 </head>
 <body>
+    <div id="remove_items">
+        <form action="/remove_items" method="POST">
+            {% for item in shopping_items %}
+            <input type="checkbox" name="check" id="{{ item }}" value="{{ item }}">
+            <label for="{{ item }}" name="{{ item }}">{{ item }}</label><br>
+            {% endfor %}
+            <input type="submit" value="REMOVE ITEMS">
+        </form>
+    </div>
     <div id="add_item">
         <form action="/add_items" method="POST">
             <select name="select_items" >
-                  {% for item in all_data %}
+                  {% for item in all_items %}
                       <option value="{{ item }}">{{ item }}</option>
                   {% endfor %}
             </select>

@@ -6,15 +6,16 @@ app = Flask(__name__)
 app.secret_key = "94883UBHJJABDBJHBDSFBJKAU43B9§00§0§"
 
 
-@app.route("/")
+@app.route("/", methods=['POST', "GET"])
 def index():
-    data = get_db()
-    return render_template("index.html", all_data=data)
+    session["all_items"], session["shopping_items"] = get_db()
+    return render_template("index.html", all_items=session["all_items"], shopping_items=session["shopping_items"])
 
 
-@app.route("/add_items", methods=["post"])
+@app.route("/add_items", methods=["POST"])
 def add_items():
-    return request.form["select_items"]
+    session["shopping_items"].append(request.form["select_items"])
+    return render_template("index.html", all_items=session["all_items"], shopping_items=session["shopping_items"])
 
 
 def get_db():
@@ -25,7 +26,12 @@ def get_db():
         cursor.execute("select name from groceries")
         all_data = cursor.fetchall()
         all_data = [str(val[0]) for val in all_data]
-    return all_data
+
+        shopping_list = all_data.copy()
+        random.shuffle(shopping_list)
+        shopping_list = shopping_list[:5]
+
+    return all_data, shopping_list
 
 
 @app.teardown_appcontext
