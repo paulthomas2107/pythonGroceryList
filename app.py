@@ -12,6 +12,11 @@ def index():
     return render_template("index.html", all_data=data)
 
 
+@app.route("/add_items", methods=["post"])
+def add_items():
+    return request.form["select_items"]
+
+
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
