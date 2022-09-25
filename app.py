@@ -3,7 +3,7 @@ import random
 from flask import Flask, session, render_template, request, g
 
 app = Flask(__name__)
-app.secret_key = "94883UBHJJABDBJHBDSFBJKAU43B9§00§0§"
+app.secret_key = "HABERDASHERY___0001"
 
 
 @app.route("/", methods=['POST', "GET"])
